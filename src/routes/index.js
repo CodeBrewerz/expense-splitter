@@ -26,7 +26,7 @@ const navigation = [
     { name: 'Home', href: '/dashboard', icon: HomeIcon, current: true },
     { name: 'History', href: '#', icon: ClockIcon, current: false },
     { name: 'Balances', href: '#', icon: ScaleIcon, current: false },
-    { name: 'Cards', href: '#', icon: CreditCardIcon, current: false },
+    { name: 'Accounts', href: '/plaid-accounts', icon: CreditCardIcon, current: false },
     { name: 'Recipients', href: '#', icon: UserGroupIcon, current: false },
     { name: 'Reconcilations', href: '/reconcilations', icon: DocumentReportIcon, current: false },
     { name: 'Transactions', href: '/transactions', icon: DocumentReportIcon, current: false },

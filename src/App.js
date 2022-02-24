@@ -6,6 +6,7 @@ import TransactionTable from './components/TransactionsTable';
 import Sortable from './components/dnd-kit/Sortable/Sortable';
 import List from './components/dnd-kit/List/List';
 import MultipleContainers from './components/dnd-kit/multiple-dnd/MultipleContainers';
+import PlaidLink from "./components/PlaidLink";
 
 function App() {
   const horizontalProps = {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/" element={<Index />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="transactions" element={<TransactionTable />} />
+          <Route path="plaid-accounts" element={<PlaidLink />} />
           <Route path="reconcilations" element={
             <main className='flex flex-1 flex-wrap'>
               <Sortable {...horizontalProps} />
