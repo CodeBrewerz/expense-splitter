@@ -2,10 +2,11 @@ import { useNhostAuth } from "@nhost/react-auth";
 import { useContext, useState } from "react"
 import NHostClientContext from '../contexts/nhost-client.context';
 import { Outlet } from "react-router-dom";
+import Tabs from "../components/Tabs";
 
 const Onboard = () => {
     const nhost = useContext(NHostClientContext);
-    const { user, isLoading, isAuthenticated } = useNhostAuth(); 
+    const { user, isLoading, isAuthenticated } = useNhostAuth();
 
     return (
         <>
@@ -19,7 +20,7 @@ const Onboard = () => {
                                 alt="Workflow"
                             />
                             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
-                            
+
                         </div>
 
                         <div className="mt-8">
@@ -85,6 +86,7 @@ const Onboard = () => {
                             </div>
 
                             <div className="mt-6">
+                                <Tabs />
                                 <Outlet />
 
                             </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
     ScaleIcon,
 } from '@heroicons/react/outline'
@@ -6,6 +6,7 @@ import {
     CashIcon,
     ChevronRightIcon,
 } from '@heroicons/react/solid'
+import { useNhostAuth } from '@nhost/react-auth'
 
 const cards = [
     { name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45' },
@@ -60,6 +61,11 @@ function classNames(...classes) {
 
 
 export default function Dashboard() {
+    const { user, isLoading, isAuthenticated } = useNhostAuth();
+
+    useEffect(() => {
+        console.log(user, "user")
+    }, [user]);
 
     return (
         <main className="flex-1 pb-8">

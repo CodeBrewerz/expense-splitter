@@ -11,8 +11,8 @@ import PlaidLink from "./components/PlaidLink";
 import Onboard from "./routes/Onboard";
 import { useContext } from "react";
 import NHostClientContext from "./contexts/nhost-client.context";
-import SignUp from "./routes/sign-up";
-import SignIn from "./routes/sign-in";
+import SignIn from "./routes/SignIn";
+import SignUp from "./routes/SignUp";
 
 function App() {
   const nhost = useContext(NHostClientContext);
@@ -52,6 +52,7 @@ function App() {
             } />
           </Route>
           <Route path="/onboard" element={<Onboard />}>
+            <Route index element={<SignIn />} />
             <Route path="sign-in" element={<SignIn />} />
             <Route path="sign-up" element={<SignUp />} />
           </Route>
