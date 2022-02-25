@@ -1,6 +1,34 @@
-# Getting Started with Create React App
+# Splitter
+Save laborious work and hundreds of hours going through your bank statements.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+“The inefficiency of splitting the bill” - [study](http://rady.ucsd.edu/faculty/directory/gneezy/pub/docs/splitting-bill.pdf)
+
+Huge Mental cost - to do the math, leave that on us.
+
+## Unforget forgetting
+
+Transactions drowned in your bank statement can be easily missed out, periodic reconciliations eliminates chances as these as transactions always remain unless reconciled.
+
+The transaction synchronization will sync and fetch all your transactions, which take place automatically  on a periodic basis.
+
+Using Plaid
+
+## Tech Stack
+
+A full stack application built using **React**, **Serverless Hasura** to autopilot managing and splitting expenses within groups (Roommates, Friends, Family, etc.)
+-   Hasura - Serverless Backend
+- Postgres - Database
+-   Hasura Auth - JWT Authentication
+-   GraphQL - Data Fetching
+-   Plaid - To Connect accounts from Financial Institutions to automate the manual process of adding transactions.
+
+## To Run Locally
+```
+$ git clone https://github.com/CodeBrewerz/expense-splitter.git
+$ cd expense-splitter
+$ npm install
+$ npm run start
+```
 
 ## Available Scripts
 
@@ -48,18 +76,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Code Splitting
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
 
