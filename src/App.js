@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import { NhostClient } from '@nhost/nhost-js'
 import { NhostAuthProvider, useNhostAuth } from '@nhost/react-auth'
 import Index from './routes';
 import { horizontalListSortingStrategy, rectSortingStrategy } from '@dnd-kit/sortable';
@@ -9,13 +8,15 @@ import Sortable from './components/dnd-kit/Sortable/Sortable';
 import List from './components/dnd-kit/List/List';
 import MultipleContainers from './components/dnd-kit/multiple-dnd/MultipleContainers';
 import PlaidLink from "./components/PlaidLink";
+import Onboard from "./routes/Onboard";
+import { useContext } from "react";
+import NHostClientContext from "./contexts/nhost-client.context";
+import SignUp from "./routes/sign-up";
 import SignIn from "./routes/sign-in";
 
 function App() {
-  const nhost = new NhostClient({
-    backendUrl: 'https://fytcssmgfmprizwxxnyb.nhost.run'
-  });
-  
+  const nhost = useContext(NHostClientContext);
+
   const horizontalProps = {
     Container: (props) => <List horizontal {...props} />,
     style: {
@@ -50,7 +51,10 @@ function App() {
               </main>
             } />
           </Route>
-          <Route path="/sign-in" element={<SignIn />}/>
+          <Route path="/onboard" element={<Onboard />}>
+            <Route path="sign-in" element={<SignIn />} />
+            <Route path="sign-up" element={<SignUp />} />
+          </Route>
         </Routes>
       </NhostAuthProvider>
 

@@ -4,6 +4,10 @@
 
 /* myComponent.css */
 
+#root {
+    height: 100%;
+}
+
 .companyBubble {
     border-radius: 50%;
     display: flex;
