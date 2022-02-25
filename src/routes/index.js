@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Fragment, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
     BellIcon,
@@ -21,7 +21,10 @@ import {
     OfficeBuildingIcon,
     SearchIcon,
 } from '@heroicons/react/solid'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useNhostAuth } from '@nhost/react-auth'
+import { useEffect } from 'react';
+import NHostClientContext from '../contexts/nhost-client.context'
 
 const navigation = [
     { name: 'Home', href: '/dashboard', icon: HomeIcon, current: true },
@@ -44,6 +47,13 @@ function classNames(...classes) {
 }
 
 export default function Index() {
+    const { user } = useNhostAuth();
+    const nhost = useContext(NHostClientContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(user);
+    }, [user]);
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     return (
@@ -233,13 +243,14 @@ export default function Index() {
                                 <Menu as="div" className="ml-3 relative">
                                     <div>
                                         <Menu.Button className="max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 lg:p-2 lg:rounded-md lg:hover:bg-gray-50">
-                                            <img
+                                            {/* <img
                                                 className="h-8 w-8 rounded-full"
                                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                                 alt=""
-                                            />
+                                            /> */}
+
                                             <span className="hidden ml-3 text-gray-700 text-sm font-medium lg:block">
-                                                <span className="sr-only">Open user menu for </span>Emilia Birch
+                                                <span className="sr-only">Open user menu for </span>{user.displayName}
                                             </span>
                                             <ChevronDownIcon
                                                 className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"
@@ -279,12 +290,15 @@ export default function Index() {
                                             </Menu.Item>
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    <button
+                                                        onClick={async () => {
+                                                            await nhost.auth.signOut();
+                                                            navigate('/onboard/sign-in');
+                                                        }}
+                                                        className={classNames(active ? 'bg-gray-100' : '', 'text-left w-full block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Logout
-                                                    </a>
+                                                    </button>
                                                 )}
                                             </Menu.Item>
                                         </Menu.Items>
@@ -301,20 +315,24 @@ export default function Index() {
                                     <div className="flex-1 min-w-0">
                                         {/* Profile */}
                                         <div className="flex items-center">
-                                            <img
+                                            {/* <img
                                                 className="hidden h-16 w-16 rounded-full sm:block"
                                                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
                                                 alt=""
-                                            />
+                                            /> */}
+                                            <span className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-gray-500">
+                                                <span className="text-xl font-medium leading-none text-white">TW</span>
+                                            </span>
                                             <div>
                                                 <div className="flex items-center">
-                                                    <img
+                                                    {/* <img
                                                         className="h-16 w-16 rounded-full sm:hidden"
                                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
                                                         alt=""
-                                                    />
+                                                    /> */}
+
                                                     <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                                                        Good morning, Emilia Birch
+                                                        Good morning, {user.displayName}
                                                     </h1>
                                                 </div>
                                                 <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">

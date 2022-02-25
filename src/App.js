@@ -13,6 +13,7 @@ import { useContext } from "react";
 import NHostClientContext from "./contexts/nhost-client.context";
 import SignIn from "./routes/SignIn";
 import SignUp from "./routes/SignUp";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   const nhost = useContext(NHostClientContext);
@@ -34,7 +35,11 @@ function App() {
     <>
       <NhostAuthProvider nhost={nhost}>
         <Routes>
-          <Route path="/" element={<Index />}>
+          <Route path="/" element={
+            <RequireAuth>
+              <Index />
+            </RequireAuth>
+          }>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="transactions" element={<TransactionTable />} />
             <Route path="plaid-accounts" element={<PlaidLink />} />

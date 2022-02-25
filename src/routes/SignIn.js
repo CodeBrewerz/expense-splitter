@@ -1,11 +1,17 @@
+import { useNhostAuth } from "@nhost/react-auth";
 import classNames from "classnames";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import NHostClientContext from '../contexts/nhost-client.context';
 
 export default function SignIn() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { user } = useNhostAuth();
     const nhost = useContext(NHostClientContext);
+    
     const { register, handleSubmit, formState: { errors } } = useForm({
         shouldUseNativeValidation: true
     });
@@ -28,15 +34,21 @@ export default function SignIn() {
         [defaultInputClassNames]: !errors,
     });
 
+    useEffect(() => {
+        if (user) navigate('/', { replace: true });
+    }, [navigate, user]);
 
     const onSubmit = async (data) => {
-        console.log("RESULT", data);
-        alert(JSON.stringify(data));
+        let from = location.state?.from?.pathname || "/";
 
         const { session, mfa, error } = await nhost.auth.signIn({
             email: data.email,
             password: data.password
         });
+
+        if (session) {
+            navigate(from, { replace: true });
+        }
     };
 
     return (
@@ -56,7 +68,7 @@ export default function SignIn() {
                         {...register("email", {
                             required: "Please enter your Email."
                         })}
-                        
+
                         className={inputClassNames}
                         placeholder="you@example.com"
                         aria-invalid="true"
@@ -87,13 +99,13 @@ export default function SignIn() {
                 </label>
                 <div className="mt-1 relative rounded-md">
                     <input
-                        
+
                         name="password"
                         type="password"
                         {...register("password", {
                             required: "Please enter your password."
                         })}
-                        
+
                         className={inputClassNames}
                     />
                     {/* {actionData?.errorMessage && (
@@ -150,7 +162,7 @@ export default function SignIn() {
                     {/* {transition.state === "submitting"
                         ? "Signing in..."
                         : "Sign In"} */}
-                        Sign In
+                    Sign In
                 </button>
             </div>
         </form>

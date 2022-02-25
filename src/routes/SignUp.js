@@ -1,14 +1,18 @@
 import classNames from "classnames";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import NHostClientContext from '../contexts/nhost-client.context';
 
 export default function SignUp() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const nhost = useContext(NHostClientContext);
     const { register, handleSubmit, formState: { errors } } = useForm({
         shouldUseNativeValidation: true
     });
+
     const validationSchema = yup.object({
         email: yup.string().required("Email is required"),
         password: yup.string().required("Password is required"),
@@ -30,9 +34,8 @@ export default function SignUp() {
 
 
     const onSubmit = async (data) => {
-        console.log("RESULT", data);
-        alert(JSON.stringify(data));
-
+        let from = location.state?.from?.pathname || "/";
+        
         const { session, error } = await nhost.auth.signUp({
             email: data.email,
             password: data.password,
@@ -40,6 +43,10 @@ export default function SignUp() {
                 displayName: data.firstName.concat(data.lastName)
             }
         });
+
+        if (session) {
+            navigate(from, { replace: true });
+        }
     };
 
     return (
