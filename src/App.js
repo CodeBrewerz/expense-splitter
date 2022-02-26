@@ -36,11 +36,12 @@ function App() {
       <NhostAuthProvider nhost={nhost}>
         <Routes>
           <Route path="/" element={
-            <RequireAuth>
+           
               <Index />
-            </RequireAuth>
+        
           }>
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
+            {/* <Route path="dashboard" element={<Dashboard />} /> */}
             <Route path="transactions" element={<TransactionTable />} />
             <Route path="plaid-accounts" element={<PlaidLink />} />
             <Route path="reconcilations" element={

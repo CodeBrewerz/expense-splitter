@@ -133,14 +133,14 @@ export default function Index() {
                                     <div className="mt-6 pt-6">
                                         <div className="px-2 space-y-1">
                                             {secondaryNavigation.map((item) => (
-                                                <a
+                                                <Link
                                                     key={item.name}
-                                                    href={item.href}
+                                                    to={item.href}
                                                     className="group flex items-center px-2 py-2 text-base font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                                                 >
                                                     <item.icon className="mr-4 h-6 w-6 text-cyan-200" aria-hidden="true" />
                                                     {item.name}
-                                                </a>
+                                                </Link>
                                             ))}
                                         </div>
                                     </div>
@@ -184,14 +184,14 @@ export default function Index() {
                             <div className="mt-6 pt-6">
                                 <div className="px-2 space-y-1">
                                     {secondaryNavigation.map((item) => (
-                                        <a
+                                        <Link
                                             key={item.name}
-                                            href={item.href}
+                                            to={item.href}
                                             className="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-cyan-100 hover:text-white hover:bg-cyan-600"
                                         >
                                             <item.icon className="mr-4 h-6 w-6 text-cyan-200" aria-hidden="true" />
                                             {item.name}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
@@ -250,7 +250,7 @@ export default function Index() {
                                             /> */}
 
                                             <span className="hidden ml-3 text-gray-700 text-sm font-medium lg:block">
-                                                <span className="sr-only">Open user menu for </span>{user.displayName}
+                                                <span className="sr-only">Open user menu for </span>{user?.displayName || 'User'}
                                             </span>
                                             <ChevronDownIcon
                                                 className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"
@@ -332,7 +332,7 @@ export default function Index() {
                                                     /> */}
 
                                                     <h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
-                                                        Good morning, {user.displayName}
+                                                        Good morning, {user?.displayName || 'User'}
                                                     </h1>
                                                 </div>
                                                 <dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">

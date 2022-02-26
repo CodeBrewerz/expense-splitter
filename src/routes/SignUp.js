@@ -40,7 +40,7 @@ export default function SignUp() {
             email: data.email,
             password: data.password,
             options: {
-                displayName: data.firstName.concat(data.lastName)
+                displayName: data.firstName.concat(data.lastName) || "",
             }
         });
 
