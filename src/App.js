@@ -14,6 +14,8 @@ import NHostClientContext from "./contexts/nhost-client.context";
 import SignIn from "./routes/SignIn";
 import SignUp from "./routes/SignUp";
 import RequireAuth from "./components/RequireAuth";
+import Group from "./routes/Group";
+import HorizontalLinearStepper from "./routes/HorizontalLinearStepper";
 
 function App() {
   const nhost = useContext(NHostClientContext);
@@ -36,14 +38,14 @@ function App() {
       <NhostAuthProvider nhost={nhost}>
         <Routes>
           <Route path="/" element={
-           
               <Index />
-        
           }>
             <Route index element={<Dashboard />} />
             {/* <Route path="dashboard" element={<Dashboard />} /> */}
             <Route path="transactions" element={<TransactionTable />} />
+            <Route path="group" element={<Group />} />
             <Route path="plaid-accounts" element={<PlaidLink />} />
+            <Route path="stepper" element={<HorizontalLinearStepper />} />
             <Route path="reconcilations" element={
               <main className='flex flex-1 flex-wrap'>
                 <Sortable {...horizontalProps} />
